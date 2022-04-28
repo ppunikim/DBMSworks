@@ -145,3 +145,59 @@ DCL(Data Controll Lang.)
 사용자에게 권한을 부여(GRANT)하거나 회수(REVOKE)하는 명령이 있고,
 데이터를 COMMIT, 또는 ROLLBACK 하는 명령이 있다.
 */
+
+
+
+
+
+
+
+-- drop은 rollback도 되지 않는다.
+DROP TABLE tbl_student;
+CREATE TABLE tbl_student(
+st_num	  VARCHAR2(5)    PRIMARY KEY,
+st_name	  NVARCHAR2(20)	 NOT NULL,
+st_dept	  NVARCHAR2(10)      ,		
+st_grade  NUMBER(1)	        ,	
+st_tel	  VARCHAR2(15)	 NOT NULL UNIQUE,
+st_addr	  NVARCHAR2(125)		
+);
+
+CREATE TABLE tbl_score(
+sc_stnum	VARCHAR2(5)		PRIMARY KEY,
+sc_kor	NUMBER		,
+sc_eng	NUMBER		,
+sc_math	NUMBER		,
+sc_his	NUMBER		,
+sc_moral	NUMBER	,	
+sc_sci	NUMBER		
+);
+
+SELECT *
+FROM tbl_student;
+
+SELECT st_dept, COUNT(st_dept)
+FROM tbl_student
+GROUP BY st_dept;
+
+-- 큰 학생수별로 정렬하기(1)
+SELECT st_dept, COUNT(st_dept) 
+FROM tbl_student
+GROUP BY st_dept
+ORDER BY COUNT( st_dept) DESC;
+
+-- 큰 학생수별로 정렬하기(2)
+SELECT st_dept, COUNT(st_dept) AS 학생수
+FROM tbl_student
+GROUP BY st_dept
+ORDER BY 학생수 DESC;
+
+-- 학생수가 같으면 학과 이름별 정렬하기
+SELECT st_dept, COUNT(st_dept) AS 학생수
+FROM tbl_student
+GROUP BY st_dept
+ORDER BY 학생수 DESC, st_dept ;
+
+
+
+
