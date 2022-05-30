@@ -156,6 +156,62 @@ ADD CONSTRAINT FK_tbl_dept
 FOREIGN KEY (b_dcode)
 REFERENCES tbl_dept(d_code);
 
+-------------------------------------
+-- 위 join 확인하는 방법
+SELECT * 
+FROM tbl_student;
+/*
+20220001	햇살	1		
+20220002	구름	3		
+20220003	샛별	2		
+*/
+SELECT * 
+FROM tbl_dept;
+/*
+D0001	컴공	우주	505
+D0002	전자	우주	506
+D0003	컴공	우주	504
+*/
+SELECT * 
+FROM tbl_belong;
+/*
+1	20220001	D0001
+2	20220002	D0001
+3	20220002	D0002
+4	20220003	D0001
+5	20220003	D0002
+6	20220003	D0003
+*/
+-- tbl_student에 아직 추가되지 않은 학번을 belong table에 추가하기
+INSERT INTO tbl_belong(b_seq, b_stnum, b_dcode)
+VALUES(seq_belong.NEXTVAL, '20220004','D0003');
+-- 부모키(parent key not found)가 없어서, 오류가 난다.
+
+-- 186~7 코드가 오류나지 않도록 하는 방법은 
+-- 먼저 학생 테이블의 해당 학번에 학생 정보를 추가해두어야 한다.
+INSERT INTO tbl_student(st_num, st_name, st_grade) 
+VALUES('20220004','김뿌니',1);
+-- 이 이후에 187번 코드 실행해보기!
+
+
+-- 만약 추가한 데이터를 삭제(delete)하면 어떻게 될까?
+DELETE FROM tbl_student WHERE st_num = '20220004';
+-- 제약조건에 문제(child record found)가 생기는 오류가 발생해 지울 수 없도록 한다. 
+-- 이러하면 안전하다.(데이터 무결성 파괴를 막는다.)
+
+/* 만약 child의 데이터를 삭제, 변경 하려면?
+   fk의 옵션을 지정하여 parent의 정보가 삭제되면 child의 데이터를 모두 삭제한다.
+   parent의 데이터가 변경되면 child  데이터를 변경하도록 설정할 수 있다.
+   
+   즉, parent의 데이터를 일괄 변경 하거나 table의 구조를 변경하려고 하면
+   fk를 먼저 제거하고 실행해야 한다.
+   이러한 이유로 인해 데이터를 모두 작성한 후에 join&FK하는 것이 좋다.
+*/
+
+-- FK로 설정한 데이터를 삭제하는 코드
+ALTER TABLE tbl_belong
+DROP CONSTRAINT FK_tbl_student CASCADE;
+
 
 
 
