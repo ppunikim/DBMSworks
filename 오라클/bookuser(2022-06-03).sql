@@ -21,3 +21,6 @@ INSERT INTO tbl_books(isbn, title, author, publisher, price )
 VALUES('934798579','고민의 답','글배우','햇살책방',13000);
 
 commit;
+
+DROP table tbl_books;
+DESC tbl_books;

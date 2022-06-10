@@ -1,10 +1,13 @@
---여기는 관리자 페이지
+-- 여기는 관리자 영역
+-- SELLFIT 데이터 만들 공간
+DROP TABLESPACE sellfit
+INCLUDING CONTENTS AND DATAFILES CASCADE CONSTRAINTS;
 
 CREATE TABLESPACE sellfit
 DATAFILE 'C:/oraclexe/data/sellfit.dbf'
 SIZE 1M AUTOEXTEND ON NEXT 1K;
 
-CREATE USER logintest IDENTIFIED BY 1234
+CREATE USER sellfit IDENTIFIED BY sellfit
 DEFAULT TABLESPACE sellfit;
 
-GRANT DBA TO logintest;
+GRANT DBA TO sellfit;
