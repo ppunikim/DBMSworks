@@ -26,6 +26,7 @@ DROP TABLE tbl_sch_list;
 CREATE TABLE tbl_sch_list(
     sl_listid   VARCHAR2(5)   NOT NULL   PRIMARY KEY,
     sl_scid    VARCHAR2(4)   NOT NULL   ,
+    si_scpnid VARCHAR2(5) NOT NULL,
     sl_list   nVARCHAR2(125)      ,
     sl_set   number(4)      ,
     sl_weight   VARCHAR2(10),      
