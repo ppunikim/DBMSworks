@@ -45,7 +45,7 @@ GRANT ALL PRIVILEGES ON *.* TO 'user1'@'127.0.0.1';
 -- 어디에서나 접속할 수 있도록 범위를 지정하지 않은 사용자 등록.
 CREATE USER 'user2'@'*' IDENTIFIED BY '!Korea8080';
 
-
+tbl_users
 
 
 
