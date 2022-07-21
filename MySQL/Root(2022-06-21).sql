@@ -2,7 +2,7 @@ use mydb;
 DROP TABLE tbl_ems;
 
 DESCRIBE tbl_users;
-DESC tbl_users;
+DESC tbl_users tbl_memo;
 
 SHOW tables;
 
@@ -25,3 +25,5 @@ SELECT * FROM tbl_memo
 WHERE m_author = 'ppuni@naver.com';
 
 DROP TABLE tbl_memo;
+
+commit;
